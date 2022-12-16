@@ -10,13 +10,13 @@ import java.beans.JavaBean;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 public class MemberService {
     //꿀팁//
     //Ctrl + Shift + T 입력 시 해당 클래스 Test 자동 생성
     private final MemberRepository memberRepository;
 
-    @Autowired//Service와 Repository 연결
+
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
