@@ -1,35 +1,31 @@
 package com.example.Spring_boot_Studying.Service;
 
 import com.example.Spring_boot_Studying.Domain.Member;
+import com.example.Spring_boot_Studying.Repository.MemberRepository;
 import com.example.Spring_boot_Studying.Repository.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+@SpringBootTest
+@Transactional
 
-class MemberServiceTest {
+class MemberServiceIntegrationTest {
 
-    MemoryMemberRepository memberRepository;
-    MemberService memberService;
+    @Autowired MemberRepository memberRepository;
+    @Autowired MemberService memberService;
 
 
-    @BeforeEach
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-
-    @AfterEach
-    public void afterEach(){
-        memberRepository.clearStore();
-    }
 
     @Test
+    //@Commit //트랜잭션이더라도 데이터 추가하는 어노테이션
     void 회원가입() {
         //given//무언가가 주어졌는데
         Member member = new Member();
@@ -39,7 +35,6 @@ class MemberServiceTest {
 
         //then//결과가 이래야 한다.
         Member findeMember = memberService.findOne(saveId).get();
-
         assertThat(member.getName()).isEqualTo(findeMember.getName());
     }
 
@@ -73,13 +68,4 @@ class MemberServiceTest {
 
     }
 
-    @Test
-    void findMembers() {
-
-    }
-
-    @Test
-    void findOne() {
-
-    }
 }

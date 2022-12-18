@@ -5,13 +5,15 @@ import com.example.Spring_boot_Studying.Repository.MemberRepository;
 import com.example.Spring_boot_Studying.Repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.JavaBean;
 import java.util.List;
 import java.util.Optional;
 
 
-@Service
+//@Service
+@Transactional
 public class MemberService {
     //꿀팁//
     //Ctrl + Shift + T 입력 시 해당 클래스 Test 자동 생성
